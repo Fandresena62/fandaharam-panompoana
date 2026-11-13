@@ -115,35 +115,42 @@ th button{position:absolute;top:2px;right:2px;width:18px;height:18px;min-height:
 #io{max-width:860px;margin:10px auto;display:none}
 #io textarea{width:100%;height:120px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px;font:12px monospace}
 
-/* ---------- Fanontana (17px) ---------- */
+/* ---------- Fanontana (endrika madio) ---------- */
 @media print{
-@page{margin:10mm}
-:root,:root[data-theme="dark"],:root:not([data-theme="light"]){padding:0;--bg:#fff;--card:#fff;--ink:#000;--mut:#444;--head:#1f3a5f;--line:#c2c9d4;--line2:#7d8798;--note:#f3f5f9;--sortie:#fde7e7;--warnbg:#fff;--warn:#000;--dng:#b3261e;--ds:55%;--dl:89%}
+@page{margin:9mm}
+:root,:root[data-theme="dark"],:root:not([data-theme="light"]){padding:0;--bg:#fff;--card:#fff;--ink:#14213a;--mut:#4a5670;--head:#1f3a5f;--line:#d5dbe6;--line2:#aab4c6;--note:#f4f6fa;--sortie:#fdecec;--warnbg:#fff;--warn:#000;--dng:#b3261e;--gold:#e8a33d;--ds:55%;--dl:90%}
 *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-body{background:#fff;padding:0;font-size:17px;line-height:1.35}
+body{background:#fff;padding:0;font-size:16px;line-height:1.3}
 .bar,#mbar,#io,.hint,.tools,.act,th button,#dash,.toast,.ms,.tsw::after{display:none!important}
 body[data-v="dash"] #stage,body[data-v="prog"] #stage{display:block}
 .stage{max-width:none;overflow:visible;height:auto!important;width:auto!important;position:static}
 #sheet,.stage.rot #sheet{width:100%!important;max-width:none!important;transform:none!important;position:static!important;margin:0}
-.sh{border:1px solid var(--line2);border-radius:0;box-shadow:none;overflow:visible}
-table{font-size:17px}
-th{font-size:15px;padding:8px 4px}
-td{padding:6px 5px}
-td,th{border-right:1px solid var(--line)}
-th{border-right-color:#ffffff66}
+.sh{border:2px solid var(--head);border-radius:0;box-shadow:none;overflow:visible}
+.sh header{background:var(--head);color:#fff;padding:14px 16px 12px;border-bottom:5px solid var(--gold);position:relative}
+.sh h1{font-size:30px;letter-spacing:5px;color:#fff;font-weight:800}
+.sh header p{font-size:16px;color:#d8e2f4;margin-top:4px;letter-spacing:1px}
+.sh header p.mo{margin-top:9px;font-size:20px;color:#14213a;letter-spacing:1.5px;text-transform:uppercase}
+.sh header p.mo .e{background:var(--gold)!important;border:0!important;border-radius:999px;padding:3px 26px!important;color:#14213a;font-weight:800;font-size:20px;display:inline-block}
+table{font-size:16px;border-collapse:collapse}
+th{font-size:13.5px;letter-spacing:1.4px;padding:9px 5px;background:var(--head);color:#fff;border-right:1px solid #ffffff40}
+td{padding:6px 6px;border-bottom:1px solid var(--line2);border-right:1px solid var(--line)}
 td:last-child,th:last-child{border-right:0}
+tr.gi td{border-bottom:1px dashed var(--line2)}
+tr.zb td{background-image:linear-gradient(#1f3a5f0d,#1f3a5f0d)}
+td.d{font-weight:800;font-size:16.5px}
+td:first-child{font-weight:700}
+tr.s td{background-color:var(--sortie)}
+tr.s td:first-child{box-shadow:inset 6px 0 0 var(--dng)}
+.sb{display:block;width:max-content;margin:3px auto 0;font-size:10.5px;padding:1px 9px;letter-spacing:1.2px}
+tr.s td:first-child{padding-left:12px}
 thead{display:table-header-group}
 tr{break-inside:avoid}
-.e,.tn{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;min-width:0!important;font-size:17px;font-weight:600}
+.e,.tn{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;min-width:0!important;font-size:16px;font-weight:600}
 .e:empty::before,.tn:empty::before{content:""}
 td.dup .tn{color:#000}
-.note{break-inside:avoid;color:#000;font-size:16px}
-.sh h1{font-size:30px}
-.sh header{padding:16px 14px 12px}
-.sh header p.mo{font-size:20px;margin-top:6px}
-.sh header p{font-size:16px}
-td{padding:7px 6px}
-.pf{display:block;padding:6px 14px;text-align:right;font-size:14px;color:#444;border-top:1px solid var(--line)}
+tbody tr:last-child td{border-bottom:0}
+.note{break-inside:avoid;color:var(--ink);font-size:14.5px;background:var(--note);border-top:2px solid var(--head);border-left:6px solid var(--gold);padding:9px 14px}
+.pf{display:block;padding:6px 14px;text-align:center;font-size:12px;letter-spacing:.6px;color:#5a667f;border-top:1px solid var(--line2)}
 }
 </style>
 </head>

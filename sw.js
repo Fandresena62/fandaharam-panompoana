@@ -1,5 +1,5 @@
 // Mandeha tsy misy aterineto: mitahiry kopia ny rakitra rehetra. Raha misy aterineto, maka ny kinova vaovao.
-const V = "fp-v9";
+const V = "fp-v11";
 const FILES = ["./", "./index.html", "./manifest.webmanifest", "./icons/icon-192.png", "./icons/icon-512.png", "./icons/icon-maskable-512.png", "./icons/apple-touch-icon.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(V).then(c => c.addAll(FILES)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => {

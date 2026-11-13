@@ -37,7 +37,7 @@ ANGONA SORATANAO
 
 FANAMBARANA FANOVANA
 --------------------
-  Raha ovaina ny kinova, ovay ny "fp-v9" ho "fp-v10" ao amin'ny sw.js dia apetraho indray.
+  Raha ovaina ny kinova, ovay ny "fp-v11" ho "fp-v12" ao amin'ny sw.js dia apetraho indray.
 
 FANDRAISANA (DASHBOARD), FARITANY SY MPITARIKA (vaovao)
 -------------------------------------------------------
@@ -80,3 +80,8 @@ FITODIKA NY TARATASY (fp-v9)
   "↔ Auto" (paysage ho azy raha maherin'ny 6 ny tsanganana), "▭ Mitsivalana" (paysage foana)
   na "▯ Mitsangana" (portrait foana). Tsiahivina ny safidinao. Ny Vercel: misy vercel.json
   mba hahazoana ny kinova vaovao avy hatrany (sw.js tsy tehirizina ela).
+
+ENDRIKA FANONTANA VAOVAO (fp-v11)
+---------------------------------
+  Lohateny manga maizina misy tsipika volamena sy ny volana ao anaty boribory volamena, tabilao misy lohateny manga,
+  andalana mifandimby loko, SORTIE misy marika mena, fanamarihana misy tsipika volamena ary daty fanontana any ambany.
