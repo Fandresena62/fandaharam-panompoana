@@ -1,0 +1,82 @@
+FANDAHARAM-PANOMPOANA - APPLICATION (PWA)
+=========================================
+
+Ao anatin'ity lahatahiry ity:
+  index.html, manifest.webmanifest, sw.js, icons/   <- apetraho ao amin'ny site web ireo rehetra ireo
+
+DINGANA 1 - Apetraho any amin'ny aterineto (maimaim-poana, 2 minitra)
+---------------------------------------------------------------------
+Safidy A (tsotra indrindra): Vercel
+  1. Mamorona kaonty maimaim-poana ao amin'ny https://vercel.com/signup (azo atao amin'ny GitHub na mailaka).
+  2. Apetraho ao amin'ny GitHub ny rakitra rehetra (index.html, manifest.webmanifest, sw.js, vercel.json, icons/) amin'ny repository vaovao.
+  3. Ao Vercel: "Add New > Project" > Import ilay repository > "Framework Preset: Other" > Deploy.
+     (Tsy ilaina ny "Build Command" na "Output Directory": avelao foana.)
+  4. Mahazo rohy toy ny  https://anarana.vercel.app
+     Raha tsy te hampiasa GitHub: apetraho ny Vercel CLI (npm i -g vercel) dia ao anatin'ny lahatahiry "vercel --prod".
+
+Safidy B: GitHub Pages
+  1. Mamorona kaonty github.com, dia "New repository" (public).
+  2. "Add file > Upload files": atsoboy ny rakitra rehetra (index.html, manifest..., sw.js, icons/).
+  3. "Settings > Pages > Branch: main > Save". Rohy: https://anaranao.github.io/anaran-repository/
+
+Safidy C: Cloudflare Pages / Netlify Drop (app.netlify.com/drop)  (pages.cloudflare.com > Upload assets)
+
+DINGANA 2 - Apetraho ho application ao amin'ny findainao
+--------------------------------------------------------
+  Android (Chrome): sokafy ny rohy > ⋮ > "Installer l'application" / "Install app".
+  iPhone (Safari): sokafy ny rohy > Zara-tany > "Add to Home Screen".
+  Hiseho eo amin'ny efijery fandraisana miaraka amin'ny sary kalandrie sy ny anarana "Fandaharana".
+  Rehefa nisokatra indray mandeha tamin'ny aterineto, mandeha tsy misy aterineto koa izy.
+
+ANGONA SORATANAO
+----------------
+  - Voatahiry ao amin'ny findainao ihany (tsy ao amin'ny server). Tsy hita amin'ny fitaovana hafa.
+  - Mba hafindra: "⇅ Tahiry" > "Haka ny angona" > adikao > any amin'ny fitaovana hafa "Ampiasao".
+  - Raha mamafa ny angona-pitetezam-pitaterana (browser data) ianao dia mivoaka ny angona: manaova kopia matetika.
+  - Ny angona nosoratanao tao amin'ny pejy Claude dia tsy mifindra ho azy: ampiasao ny "⇅ Tahiry" hafindra.
+
+FANAMBARANA FANOVANA
+--------------------
+  Raha ovaina ny kinova, ovay ny "fp-v9" ho "fp-v10" ao amin'ny sw.js dia apetraho indray.
+
+FANDRAISANA (DASHBOARD), FARITANY SY MPITARIKA (vaovao)
+-------------------------------------------------------
+  - Fandraisana: fanompoana manaraka (daty, ora, toerana fihaonana, faritany, mpitarika), fanjohian'ny volana ankehitriny, lisitry ny faritany ary ny rahalahy afaka mitarika.
+  - Bokotra "＋ Rahalahy": mampiditra rahalahy afaka mitarika (anarana + laharana finday tsy voatery). "✎ Hanova" na "Fafao" ao amin'ny lisitra.
+  - Bokotra "＋ Faritany": mampiditra faritany (anarana, andro, andiam-pitory, ora, toerana fihaonana, ary fidio ny rahalahy afaka mitarika azy).
+  - Faritany efa napetraka (araka ny angona nomena): Talata, Alakamisy, Asabotsy (andiam-pitory 1 sy 2) ary Alahady ariva.
+  - Ao amin'ny Programme: tsindrio ny anaran'ny mpitarika dia mivoaka ny rahalahy afaka mitarika an'io faritany io. "⚙ Zarao ho azy ny mpitarika" mameno ny andalana foana ho azy (tsy mitovy mpitarika amin'ny andiam-pitory roa amin'ny andro iray). Voasary mavo ny mpitarika iray miverimberina amin'ny andro iray.
+  - Ny fanovana faritany dia hita amin'ny volana vaovao na rehefa "↺ Averina araka ny faritany" ny volana (very ny fanovana nataonao tamin'io volana io).
+  - Ny angona taloha dia mijanona; tsy mifindra ho azy ny volana efa misy.
+
+FANTONTANA / PDF (vaovao)
+-------------------------
+  Tsindrio ny bokotra "🖨 Hanonta" eo ambony. Hiseho ny fanontana: safidio ny printer, na "Save as PDF" / "Tehirizo ho PDF".
+  Soratra 13px. Ny tabilao ihany no misy (tsy misy bokotra), amin'ny A4 miaraka amin'ny loko, ary lisitry ny faritany sy ny rahalahy afaka mitarika any ambany. Raha maherin'ny 6 ny tsanganana dia mihiboka (paysage) ho azy.
+  Rehefa nahazo ny kinova vaovao ianao: akatony dia sokafy indroa ny application.
+
+FANOVANA VAOVAO (kinova fp-v4)
+------------------------------
+  - Asabotsy: ny andiam-pitory roa dia mizara roa mihitsy ao amin'ny programme. Ny Daty, Andro ary Ora ihany no iray (tsy mizara); samy manana andalana ny Toerana fihaonana, Faritany ary Mpitarika.
+  - X
+  - Faritany: tsindrio ny faritany ao amin'ny programme dia miseho ny lisitry ny faritany efa misy. Araka ny andro no sivanina (ohatra: andalana Talata => faritany Talata ihany). Rehefa misafidy dia mameno ho azy ny toerana fihaonana (sy ny ora raha foana) ary ny lisitry ny mpitarika dia an'io faritany io.
+  - Faritany lavitra (sortie): ao amin'ny Fandraisana > "＋ Faritany" dia tsidiho ny "Faritany lavitra". Izy ireo ihany no miseho rehefa tsindrina ny faritany amin'ny andalana SORTIE.
+  - Asabotsy voalohany (sortie): miseho ihany koa ny andiam-pitory roa (mizara roa), samy misafidy faritany lavitra.
+
+TABILAO VAOVAO + HANAFOANA (fp-v6)
+----------------------------------
+  - Tabilao havaozina manontolo: lohateny misaraka, andalana mifandimby loko, andro misy loko, SORTIE misy marika mena, safidy faritany/mpitarika amin'ny endrika bokotra.
+  - Fanafoanana tampoka: rehefa mamafa andalana, tsanganana, mameno ho azy ny mpitarika na mamerina ny volana dia miseho ny bokotra "↶ Hanafoana" (9 segondra) ary misy ihany koa eo ambony. Averina amin'ny toerany ihany ny andalana (na eo afovoany aza). Tsy mitahiry izany rehefa akatona ny application.
+  - Bokotra "＋" isaky ny andalana: mampiditra andalana vaovao eo ambanin'io andalana io (mitovy daty/andro/ora).
+
+FANTONTANA + MPITARIKA AUTOMATIKA (fp-v7)
+-----------------------------------------
+  - Ny tabilao ihany no vita pirinty (tsy misy lisitra faritany any ambany intsony). A4, soratra 13px, lohateny, loko andro, SORTIE miloko mena, ary daty fanontana any ambany.
+  - "⚙ Zarao ho azy ny mpitarika": mizara ho mitovy ny isan'ny fitarihana, ary manafay ny mpitarika iray raha vao nitarika tato ho ato (ao anatin'ny 14 andro, aloha na aoriana). Tsy miova ny mpitarika efa voasoratra. Raha 2 ihany ny rahalahy afaka mitarika amin'ny faritany iray dia mety hitranga ihany ny mifanakaiky.
+
+FITODIKA NY TARATASY (fp-v9)
+----------------------------
+  Eo ambony, eo akaikin'ny "🖨 Hanonta", misy bokotra fitodika: tsindrio mba hisafidy
+  "↔ Auto" (paysage ho azy raha maherin'ny 6 ny tsanganana), "▭ Mitsivalana" (paysage foana)
+  na "▯ Mitsangana" (portrait foana). Tsiahivina ny safidinao. Ny Vercel: misy vercel.json
+  mba hahazoana ny kinova vaovao avy hatrany (sw.js tsy tehirizina ela).

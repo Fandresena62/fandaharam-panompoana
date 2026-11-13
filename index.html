@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="mg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fandaharam-panompoana</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1f3a5f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Fandaharana">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f3f5f9;--card:#fff;--ink:#1c2433;--mut:#5b6678;--head:#1f3a5f;--line:#d9dfe9;--line2:#c3ccdb;--note:#eaf4f6;--sortie:#fde7e7;--warn:#8a5200;--warnbg:#fff1d6;--dng:#b3261e;--ds:55%;--dl:89%}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10151e;--card:#182030;--ink:#e8edf6;--mut:#9aa7bb;--head:#2b4a78;--line:#2c3850;--line2:#3b4a68;--note:#14303a;--sortie:#5a2428;--warn:#ffcf70;--warnbg:#3a2d10;--dng:#ff8a80;--ds:35%;--dl:26%}}
+:root[data-theme="dark"]{--bg:#10151e;--card:#182030;--ink:#e8edf6;--mut:#9aa7bb;--head:#2b4a78;--line:#2c3850;--line2:#3b4a68;--note:#14303a;--sortie:#5a2428;--warn:#ffcf70;--warnbg:#3a2d10;--dng:#ff8a80;--ds:35%;--dl:26%}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:12px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;max-width:860px;margin:0 auto 10px}
+button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 13px;min-height:36px;border-radius:999px;cursor:pointer}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #4d8fe0;outline-offset:1px}
+button[aria-pressed="true"],button.pri{background:var(--head);color:#fff;border-color:var(--head)}
+button.dng{color:var(--dng);border-color:var(--dng)}
+.sp{flex:1}
+#lbl{font-weight:700;min-width:120px;text-align:center}
+body[data-v="dash"] #stage,body[data-v="dash"] #mbar,body[data-v="dash"] .hint{display:none}
+body[data-v="prog"] #dash{display:none}
+
+/* ---------- Fandraisana ---------- */
+#dash{max-width:640px;margin:0 auto;font-size:16px}
+header{background:var(--head);color:#fff;text-align:center;padding:14px;border-radius:14px;margin-bottom:10px}
+h1{margin:0;font-size:20px;letter-spacing:.5px}
+header p{margin:2px 0 0;opacity:.9}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.card h2{margin:0 0 8px;font-size:17px}
+.card .hd{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.card .hd h2{margin:0}
+.big{font-size:27px;font-weight:700;line-height:1.2}
+.cd{display:inline-block;margin:8px 0 4px;padding:3px 12px;border-radius:999px;background:var(--note);font-weight:600;font-size:14px}
+.svc{border-top:1px solid var(--line);margin-top:10px;padding-top:8px}
+.svc .tm{font-size:20px;font-weight:700}
+.rl{display:flex;justify-content:space-between;gap:12px;padding:3px 0}
+.rl span{color:var(--mut)}
+.rl b{text-align:right}
+.warn{color:var(--warn);background:var(--warnbg);padding:1px 9px;border-radius:6px;font-weight:600;font-size:14px}
+.bd{display:inline-block;margin-left:8px;padding:1px 9px;border-radius:6px;background:var(--sortie);font-size:13px;font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{background:var(--note);border-radius:999px;padding:3px 11px;font-size:14px}
+.item{border-top:1px solid var(--line);padding:10px 0}
+.item .ih{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.item .ih b{font-size:16px}
+.item .sm{color:var(--mut);font-size:14px}
+.item button{padding:3px 11px;min-height:32px}
+.mut{color:var(--mut)}
+.form{background:var(--note);border-radius:12px;padding:12px;margin:8px 0}
+.form h3{margin:0 0 4px;font-size:16px}
+.form label{display:block;margin:10px 0 0;font-size:14px;color:var(--mut)}
+.form input[type="text"],.form input[type="tel"],.form select{display:block;width:100%;margin-top:3px;padding:10px;font:inherit;font-size:16px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px}
+.form .ck{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.form .ck label{display:flex;align-items:center;gap:6px;margin:0;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 12px;color:var(--ink);font-size:15px}
+.form .ck input{margin:0;width:18px;height:18px}
+.form label.ckl{display:flex;align-items:center;gap:8px;color:var(--ink);font-size:15px}
+.form .ckl input{width:20px;height:20px;margin:0}
+.form .fa{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);max-width:90%;background:#1c2433;color:#fff;padding:10px 16px;border-radius:12px;font-size:14px;z-index:9;box-shadow:0 4px 16px #0005}
+
+/* ---------- Programme (endrika vaovao) ---------- */
+.stage{max-width:860px;margin:0 auto;overflow-x:auto;position:relative}
+#sheet{width:760px;max-width:100%;margin:0 auto;transform-origin:0 0}
+.stage.rot #sheet{position:absolute;left:0;top:0;max-width:none;margin:0}
+button:disabled{opacity:.4;cursor:default}
+.sh{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 2px 8px #0001}
+.sh header{background:var(--card);color:var(--ink);border-radius:0;margin:0;padding:18px 16px 14px;border-bottom:4px solid var(--head)}
+.sh h1{font-size:21px;letter-spacing:2.5px;color:var(--ink)}
+.sh header p{margin:3px 0 0;opacity:1;color:var(--mut);font-size:14px}
+.sh header p.mo{margin-top:8px;font-size:15px;font-weight:700;color:var(--ink);letter-spacing:.5px}
+.sh header p.mo .e{padding:3px 16px;border-radius:999px;background:var(--note);border:1px solid var(--line)}
+table{width:100%;border-collapse:separate;border-spacing:0;background:var(--card);font-size:13.5px;font-variant-numeric:tabular-nums}
+th{background:var(--head);color:#fff;padding:10px 6px;font-size:11px;letter-spacing:.7px;text-transform:uppercase;position:relative}
+td{padding:9px 8px;border-bottom:1px solid var(--line2);text-align:center;vertical-align:middle}
+tr.gi td{border-bottom:1px dashed var(--line)}
+tr.zb td{background-image:linear-gradient(#80808014,#80808014)}
+td.d{background-color:hsl(var(--h) var(--ds) var(--dl));font-weight:700}
+td.gm{border-right:1px solid var(--line)}
+tr.s td{background-color:var(--sortie)}
+tr.s td.d{background-color:hsl(var(--h) var(--ds) var(--dl))}
+tr.s td:first-child{box-shadow:inset 5px 0 0 var(--dng)}
+.sb{display:inline-block;margin-top:3px;padding:1px 8px;border-radius:5px;background:var(--dng);color:#fff;font-size:10px;font-weight:700;letter-spacing:.8px}
+td.cont .e{color:var(--mut);font-weight:400}
+.e{display:inline-block;min-width:40px;max-width:100%;white-space:pre-wrap;outline:none;padding:2px 5px;border-radius:6px}
+.e:hover{background:#80808020}
+.e:empty::before{content:"—";color:var(--mut)}
+.e:focus{background:var(--note);color:var(--ink);box-shadow:0 0 0 2px #4d8fe0}
+.tsw{position:relative;display:inline-block;min-width:78px}
+.tsw::after{content:"▾";position:absolute;right:9px;top:50%;transform:translateY(-50%);color:var(--mut);font-size:11px;pointer-events:none}
+.tn{display:block;min-width:78px;padding:4px 24px 4px 11px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-weight:600}
+.tn:empty::before{content:"Fidio";color:var(--mut);font-weight:400}
+td.dup .tn{background:var(--warnbg);border-color:#e0a800;color:var(--warn)}
+.ms{position:absolute;inset:0;width:100%;height:100%;opacity:0;font-size:16px;cursor:pointer}
+.act{white-space:nowrap;width:1%}
+.act button{width:28px;height:28px;min-height:0;padding:0;border-radius:8px;font-size:13px;line-height:1;margin-left:3px}
+.act button.dl{color:var(--dng);border-color:var(--dng);margin-left:10px}
+.act button[aria-pressed="true"]{background:var(--dng);border-color:var(--dng);color:#fff}
+th button{position:absolute;top:2px;right:2px;width:18px;height:18px;min-height:0;padding:0;border-radius:5px;font-size:10px;line-height:1;background:transparent;color:#fff;border-color:#fff4;opacity:.7}
+.note{padding:12px 16px;background:var(--note);border-top:1px solid var(--line);color:var(--mut);font-size:12.5px}
+.pf{display:none}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.printonly{display:none}
+.toast .tu{margin-left:12px;background:#fff;color:#1c2433;border:0;min-height:28px;padding:2px 12px;font-weight:700}
+@media (max-width:600px){body{padding:8px}table{font-size:12.5px}td{padding:7px 3px}.e{min-width:34px}.sh h1{font-size:18px}}
+.hint{max-width:860px;margin:8px auto 0;color:var(--mut);font-size:12px;text-align:center}
+#io{max-width:860px;margin:10px auto;display:none}
+#io textarea{width:100%;height:120px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px;font:12px monospace}
+
+/* ---------- Fanontana (17px) ---------- */
+@media print{
+@page{margin:10mm}
+:root,:root[data-theme="dark"],:root:not([data-theme="light"]){padding:0;--bg:#fff;--card:#fff;--ink:#000;--mut:#444;--head:#1f3a5f;--line:#c2c9d4;--line2:#7d8798;--note:#f3f5f9;--sortie:#fde7e7;--warnbg:#fff;--warn:#000;--dng:#b3261e;--ds:55%;--dl:89%}
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{background:#fff;padding:0;font-size:17px;line-height:1.35}
+.bar,#mbar,#io,.hint,.tools,.act,th button,#dash,.toast,.ms,.tsw::after{display:none!important}
+body[data-v="dash"] #stage,body[data-v="prog"] #stage{display:block}
+.stage{max-width:none;overflow:visible;height:auto!important;width:auto!important;position:static}
+#sheet,.stage.rot #sheet{width:100%!important;max-width:none!important;transform:none!important;position:static!important;margin:0}
+.sh{border:1px solid var(--line2);border-radius:0;box-shadow:none;overflow:visible}
+table{font-size:17px}
+th{font-size:15px;padding:8px 4px}
+td{padding:6px 5px}
+td,th{border-right:1px solid var(--line)}
+th{border-right-color:#ffffff66}
+td:last-child,th:last-child{border-right:0}
+thead{display:table-header-group}
+tr{break-inside:avoid}
+.e,.tn{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;min-width:0!important;font-size:17px;font-weight:600}
+.e:empty::before,.tn:empty::before{content:""}
+td.dup .tn{color:#000}
+.note{break-inside:avoid;color:#000;font-size:16px}
+.sh h1{font-size:30px}
+.sh header{padding:16px 14px 12px}
+.sh header p.mo{font-size:20px;margin-top:6px}
+.sh header p{font-size:16px}
+td{padding:7px 6px}
+.pf{display:block;padding:6px 14px;text-align:right;font-size:14px;color:#444;border-top:1px solid var(--line)}
+}
+</style>
+</head>
+<body data-v="dash">
+<div class="bar">
+  <button id="vd" data-v="dash" aria-pressed="true">⌂ Fandraisana</button>
+  <button id="vp" data-v="prog" aria-pressed="false">📋 Programme</button>
+  <span class="sp"></span>
+  <button id="ori" title="Fitodika ny taratasy: Auto / Mitsivalana / Mitsangana">↔ Auto</button>
+  <button id="prt" title="Hanonta na hitahiry ho PDF">🖨 Hanonta</button>
+  <button id="thm" aria-pressed="false" aria-label="Maizina / mazava">☾</button>
+  <button id="iob" aria-pressed="false">⇅ Tahiry</button>
+</div>
+<div class="bar" id="mbar">
+  <button id="prev" aria-label="Volana teo aloha">‹</button>
+  <span id="lbl"></span>
+  <button id="next" aria-label="Volana manaraka">›</button>
+  <button id="today">Androany</button>
+  <button id="undo" disabled title="Averina ny fanafoanana">↶ Hanafoana</button>
+  <span class="sp"></span>
+  <button id="rot" aria-pressed="false">⟳ Hodina</button>
+</div>
+<div id="io">
+  <textarea id="ta" placeholder="Eto no miseho ny angona rehetra. Adikao hotehirizina, na apetaho eto ny angona taloha dia tsindrio ‘Ampiasao’."></textarea>
+  <div class="tools"><button id="exp">Haka ny angona</button><button id="imp">Ampiasao</button></div>
+</div>
+<div id="dash"></div>
+<div class="stage" id="stage"><div id="sheet"></div></div>
+<p class="hint">Tsindrio na inona na inona hanovana azy. Tsindrio ny anaran’ny mpitarika hisafidianana. Voatahiry ho azy ao amin’ity fitaovana ity.</p>
+<script>
+var MG=["Janoary","Febroary","Martsa","Aprily","Mey","Jona","Jolay","Aogositra","Septambra","Oktobra","Novambra","Desambra"];
+var DN=["Alahady ariva","Alatsinainy","Talata","Alarobia","Alakamisy","Zoma","Asabotsy"];
+var HUE={alahady:275,alatsinainy:340,talata:215,alarobia:100,alakamisy:165,zoma:55,asabotsy:35};
+var COLS=["Daty","Andro","Ora","Toerana fihaonana","Faritany","Mpitarika"];
+var TITLE="FANDAHARAM-PANOMPOANA",CONG="Fiangonana Ambohitrarivo";
+var NOTE="Fanamarihana: Isaky ny Asabotsy voalohan’ny volana dia misy sortie amin’ny faritany lavitra, ary mitambatra ny andiam-pitory rehetra. Tonga alohan’ny ora fanombohana, ary raha misy fiovana dia ampahafantaro mialoha ny mpitarika.";
+var S={m:{}},view="dash",rotated=false,fm=null,restoreV=null,now=new Date(),Y=now.getFullYear(),M=now.getMonth();
+
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function escA(s){return esc(s).replace(/"/g,"&quot;")}
+function wo(w){return (w+6)%7}
+function uid(p){return p+Date.now().toString(36)+Math.floor(Math.random()*46656).toString(36)}
+
+/* ---------- angona fototra: rahalahy sy faritany ---------- */
+function defCfg(){
+  var nm=["Nanja","Jean Luc","Miray","Toky","Herizoa","Solo","Absaloma","Nandraina","Josia","Ranja","Elie"];
+  var b=nm.map(function(n,i){return {id:"b"+(i+1),n:n,p:""}});
+  function id(n){return b.filter(function(x){return x.n==n})[0].id}
+  var Z=[
+    {id:"z1",n:"Faritanin’ny Mpisava lalana",w:2,g:"",h:"8:30",l:"Efitrano Ambohitrarivo",b:["Nanja","Jean Luc"]},
+    {id:"z2",n:"Amboanongo",w:4,g:"",h:"9:00",l:"Efitrano Amboanongo",b:["Miray","Toky","Nanja","Herizoa","Solo"]},
+    {id:"z3",n:"Ambohivory kely",w:6,g:"Andiam-pitory 1",h:"8:30",l:"Ao amin’ny rahalahy Rija",b:["Jean Luc","Absaloma","Nandraina"]},
+    {id:"z4",n:"Ambohitrarivo",w:6,g:"Andiam-pitory 2",h:"8:30",l:"Efitrano Ambohitrarivo",b:["Josia","Ranja"]},
+    {id:"z5",n:"Fampianarana",w:0,g:"",h:"11:00",l:"Efitrano Ambohitrarivo",b:["Josia","Ranja","Elie","Nandraina","Jean Luc","Absaloma"]}
+  ];
+  Z.forEach(function(z){z.b=z.b.map(id)});
+  return {v:1,bro:b,fz:Z};
+}
+function ensure(){if(!S.cfg||!Array.isArray(S.cfg.bro)||!Array.isArray(S.cfg.fz))S.cfg=defCfg()}
+try{var raw=localStorage.getItem("fp2");if(raw)S=JSON.parse(raw);if(!S||!S.m)S={m:{}}}catch(e){S={m:{}}}
+ensure();
+function save(){try{localStorage.setItem("fp2",JSON.stringify(S))}catch(e){}}
+function bro(id){return S.cfg.bro.filter(function(x){return x.id==id})[0]}
+function bname(id){var b=bro(id);return b?b.n:""}
+function fzOf(id){return S.cfg.fz.filter(function(x){return x.id==id})[0]}
+function fzSorted(){return S.cfg.fz.slice().sort(function(a,b){return wo(a.w)-wo(b.w)})}
+
+function saveBro(id,n,p){
+  n=String(n||"").trim();p=String(p||"").trim();
+  if(!n)return "Soraty ny anaran’ny rahalahy.";
+  var dupl=S.cfg.bro.some(function(x){return x.id!=id&&x.n.trim().toLowerCase()==n.toLowerCase()});
+  if(dupl)return "Efa ao amin’ny lisitra io anarana io.";
+  var b=id&&bro(id);
+  if(b){b.n=n;b.p=p}else S.cfg.bro.push({id:uid("b"),n:n,p:p});
+  save();return "";
+}
+function delBro(id){
+  S.cfg.bro=S.cfg.bro.filter(function(x){return x.id!=id});
+  S.cfg.fz.forEach(function(z){z.b=z.b.filter(function(x){return x!=id})});
+  save();
+}
+function saveFz(o){
+  o.n=String(o.n||"").trim();o.l=String(o.l||"").trim();o.h=String(o.h||"").trim();o.g=String(o.g||"").trim();
+  if(!o.n)return "Soraty ny anaran’ny faritany.";
+  o.w=+o.w;o.f=o.f?1:0;if(!(o.w>=0&&o.w<=6))return "Fidio ny andro.";
+  var z=o.id&&fzOf(o.id);
+  if(z){z.n=o.n;z.w=o.w;z.g=o.g;z.h=o.h;z.l=o.l;z.b=o.b;z.f=o.f}
+  else S.cfg.fz.push({id:uid("z"),n:o.n,w:o.w,g:o.g,h:o.h,l:o.l,b:o.b,f:o.f});
+  save();return "";
+}
+function delFz(id){S.cfg.fz=S.cfg.fz.filter(function(x){return x.id!=id});save()}
+
+/* ---------- volana ---------- */
+function key(y,m){return y+"-"+(m+1)}
+function ci(d,name){var n=name.toLowerCase();return d.cols.findIndex(function(c){return String(c).trim().toLowerCase()==n})}
+function cell(d,r,name){var i=ci(d,name);return i>=0?String(r.c[i]||""):""}
+function gen(y,m){
+  var f=new Date(y,m,1).getDay(),n=new Date(y,m+1,0).getDate(),rows=[],sat=0,a=MG[m].slice(0,3);
+  for(var d=1;d<=n;d++){
+    var w=(f+d-1)%7,zs=S.cfg.fz.filter(function(z){return z.w==w&&!z.f});if(!zs.length)continue;
+    if(w==6)sat++;
+    var so=(w==6&&sat==1)?1:0;
+    zs.forEach(function(z){rows.push({c:[d+" "+a,DN[w],z.h,z.l,so?"Faritany lavitra":(z.g?z.g+": ":"")+z.n,""],z:z.id,s:so})});
+  }
+  return {t:TITLE,ch:CONG,lb:MG[m]+" "+y,note:NOTE,cols:COLS.slice(),rows:rows};
+}
+function monthData(y,m){return S.m[key(y,m)]||gen(y,m)}
+function D(){var k=key(Y,M);if(!S.m[k])S.m[k]=gen(Y,M);return S.m[k]}
+function hue(txt){var w=String(txt).trim().toLowerCase().split(/\s+/)[0];return HUE[w]}
+function ed(attr,txt){return '<span class="e" contenteditable="true" '+attr+'>'+esc(txt)+'</span>'}
+
+function leaderCell(r,ri,v){
+  var z=r.z?fzOf(r.z):null,names=[];
+  (z&&z.b.length?z.b.map(bname):S.cfg.bro.map(function(b){return b.n})).forEach(function(n){if(n&&names.indexOf(n)<0)names.push(n)});
+  var cur=String(v||"").trim(),o='<option value="">(Foana)</option>';
+  if(cur&&names.indexOf(cur)<0)names.unshift(cur);
+  o+=names.map(function(n){return '<option value="'+escA(n)+'"'+(n==cur?' selected':'')+'>'+esc(n)+'</option>'}).join("");
+  o+='<option value="__other__">✎ Hafa…</option>';
+  return '<div class="tsw"><span class="tn">'+esc(v||"")+'</span><select class="ms" data-k="l" data-r="'+ri+'" aria-label="Mpitarika">'+o+'</select></div>';
+}
+function zlabel(z){return (z.g?z.g+": ":"")+z.n}
+function rowWd(r,d){
+  var dn=parseInt(r.c[0],10);if(!isNaN(dn))return new Date(Y,M,dn).getDay();
+  var ai=ci(d,"andro"),a=ai>=0?String(r.c[ai]||"").trim().toLowerCase().split(/\s+/)[0]:"";
+  for(var i=0;i<7;i++){if(a&&DN[i].toLowerCase().split(" ")[0]==a)return i}
+  return null;
+}
+function zoneCell(d,r,ri,v){
+  var wd=rowWd(r,d),zs=r.s?S.cfg.fz.filter(function(z){return z.f}):fzSorted().filter(function(z){return !z.f&&(wd===null||z.w==wd)});
+  var cur=String(v||"").trim(),sel="",o='<option value="">(Fidio ny faritany)</option>';
+  zs.forEach(function(z){if(r.z==z.id)sel=z.id});
+  if(!sel)zs.forEach(function(z){if(!sel&&zlabel(z).toLowerCase()==cur.toLowerCase())sel=z.id});
+  if(!sel&&cur&&!(r.s&&cur=="Faritany lavitra"))o+='<option value="__cur__" selected>'+esc(cur)+'</option>';
+  if(!zs.length)o+='<option value="__none__" disabled>'+(r.s?"(Mbola tsy misy faritany lavitra: ampio ao amin’ny Fandraisana)":"(Tsy misy faritany amin’io andro io)")+'</option>';
+  o+=zs.map(function(z){return '<option value="'+z.id+'"'+(z.id==sel?' selected':'')+'>'+esc(zlabel(z))+'</option>'}).join("");
+  o+='<option value="__other__">✎ Hafa…</option>';
+  return '<div class="tsw"><span class="tn">'+esc(v||"")+'</span><select class="ms" data-k="z" data-r="'+ri+'" aria-label="Faritany">'+o+'</select></div>';
+}
+function setZone(d,r,v){
+  var fc=ci(d,"faritany"),tc=ci(d,"toerana fihaonana"),oc=ci(d,"ora");if(fc<0)return;
+  if(v=="__cur__"||v=="__none__"){render();return}
+  if(v=="__other__"){var x=prompt("Soraty ny anaran’ny faritany:",r.c[fc]||"");if(x===null){render();return}r.c[fc]=x.trim();delete r.z}
+  else if(v===""){r.c[fc]=r.s?"Faritany lavitra":"";delete r.z}
+  else{
+    var z=fzOf(v);if(!z){render();return}
+    r.z=z.id;r.c[fc]=zlabel(z);
+    if(tc>=0&&z.l)r.c[tc]=z.l;
+    if(oc>=0&&z.h&&!String(r.c[oc]||"").trim())r.c[oc]=z.h;
+  }
+  save();render();
+}
+function groupInfo(d,dc,oc){
+  var rows=d.rows,info=[],i=0,gc=0;
+  while(i<rows.length){
+    var dv=String(rows[i].c[0]||"").trim(),j=i+1,k;
+    if(dv){while(j<rows.length&&String(rows[j].c[0]||"").trim()==dv)j++}
+    var n=j-i,m={};
+    if(n>1){
+      [0,dc,oc].forEach(function(c){
+        if(c<0||m[c])return;
+        var base=String(rows[i].c[c]||"").trim(),same=true;
+        for(var q=i+1;q<j;q++){if(String(rows[q].c[c]||"").trim()!=base)same=false}
+        if(same)m[c]=1;
+      });
+    }
+    for(k=i;k<j;k++)info[k]={n:n,first:k==i,last:k==j-1,m:m,x:gc};
+    i=j;gc++;
+  }
+  return info;
+}
+function refHtml(){
+  var z=fzSorted();if(!z.length)return "";
+  return '<div class="printonly"><h3>Faritany sy rahalahy afaka mitarika</h3><table><thead><tr><th>Andro</th><th>Faritany</th><th>Toerana fihaonana</th><th>Rahalahy afaka mitarika</th></tr></thead><tbody>'+
+    z.map(function(x){return '<tr><td>'+esc(x.f?'Sortie (lavitra)':DN[x.w])+(x.h?' '+esc(x.h):'')+'</td><td>'+esc((x.g?x.g+": ":"")+x.n)+'</td><td>'+esc(x.l)+'</td><td>'+esc(x.b.map(bname).filter(Boolean).join(", "))+'</td></tr>'}).join("")+
+    '</tbody></table></div>';
+}
+function render(){
+  var d=D(),lc=ci(d,"mpitarika"),dayCol=ci(d,"andro"),oc=ci(d,"ora"),tc=ci(d,"toerana fihaonana"),fc=ci(d,"faritany");
+  document.getElementById("lbl").textContent=MG[M]+" "+Y;
+  var th=d.cols.map(function(c,i){return '<th>'+ed('data-h="'+i+'"',c)+'<button data-dc="'+i+'" title="Manala tsanganana">✕</button></th>'}).join("");
+  var dup={};
+  if(lc>=0)d.rows.forEach(function(r){var v=String(r.c[lc]||"").trim().toLowerCase();if(!v)return;var k=r.c[0]+"|"+v;dup[k]=(dup[k]||0)+1});
+  var grp=groupInfo(d,dayCol,oc);
+  var tr=d.rows.map(function(r,ri){
+    var g=grp[ri],cont=ri>0&&r.c[0]&&r.c[0]==d.rows[ri-1].c[0];
+    var tds=d.cols.map(function(_,cj){
+      var v=r.c[cj]||"",h=cj==dayCol?hue(v):null,cls=[],inner,span="",mg=!!g.m[cj];
+      if(mg){if(!g.first)return "";span=' rowspan="'+g.n+'"';cls.push("gm")}
+      if(h!==null&&h!==undefined)cls.push("d");
+      if(cj==0&&cont&&!mg)cls.push("cont");
+      if(cj==lc){var kk=r.c[0]+"|"+String(v).trim().toLowerCase();if(String(v).trim()&&dup[kk]>1)cls.push("dup");inner=leaderCell(r,ri,v)}
+      else if(cj==fc)inner=zoneCell(d,r,ri,v);
+      else inner=ed('data-r="'+ri+'" data-c="'+cj+'"'+(mg?' data-g="'+g.n+'"':''),v);
+      if(cj==0&&r.s)inner+='<div class="sb">SORTIE</div>';
+      return '<td'+span+(cls.length?' class="'+cls.join(" ")+'"':'')+(h!==null&&h!==undefined?' style="--h:'+h+'"':'')+'>'+inner+'</td>'}).join("");
+    var rc=[];if(r.s)rc.push("s");rc.push(g.last?"ge":"gi");if(g.x%2)rc.push("zb");
+    return '<tr class="'+rc.join(" ")+'">'+tds+'<td class="act"><button data-ar="'+ri+'" title="Hampiditra andalana eto ambany">＋</button><button data-sr="'+ri+'" aria-pressed="'+(r.s?"true":"false")+'" title="Sortie">★</button><button class="dl" data-dr="'+ri+'" title="Manala andalana (azo averina)">✕</button></td></tr>'}).join("");
+  document.getElementById("sheet").innerHTML=
+   '<div class="sh"><header><h1>'+ed('data-f="t"',d.t)+'</h1><p>'+ed('data-f="ch"',d.ch)+'</p><p class="mo">'+ed('data-f="lb"',d.lb)+'</p></header>'+
+   '<table><thead><tr>'+th+'<th class="act"></th></tr></thead><tbody>'+tr+'</tbody></table>'+
+   '<div class="note">'+ed('data-f="note"',d.note)+'</div><div class="pf">Nanontana tamin’ny '+new Date().toLocaleDateString("fr-FR")+'</div></div>'+
+   '<div class="tools"><button id="ar">+ Andalana</button><button id="ac">+ Tsanganana</button><button id="aa">⚙ Zarao ho azy ny mpitarika</button><button id="rs">↺ Averina araka ny faritany</button></div>';
+  layout();updUndo();
+}
+/* ---------- Hanafoana (undo) ---------- */
+var UN=[];
+function snap(){UN.push({k:key(Y,M),m:JSON.stringify(D())});if(UN.length>30)UN.shift();updUndo()}
+function updUndo(){var u=document.getElementById("undo");if(u)u.disabled=!UN.length}
+function undo(){
+  var u=UN.pop();if(!u){updUndo();return}
+  var kk=u.k.split("-");Y=+kk[0];M=+kk[1]-1;
+  S.m[u.k]=JSON.parse(u.m);save();render();toast("Naverina ny teo aloha.");
+}
+function layout(){
+  var s=document.getElementById("sheet"),st=document.getElementById("stage"),d=D();
+  var w=Math.max(760,d.cols.length*118);
+  if(rotated){
+    st.classList.add("rot");s.style.width=w+"px";s.style.transform="none";
+    var h=s.offsetHeight;
+    s.style.transform="translateX("+h+"px) rotate(90deg)";
+    st.style.height=w+"px";st.style.width=Math.min(h,document.body.clientWidth)+"px";
+  }else{
+    st.classList.remove("rot");s.style.transform="";s.style.width=w+"px";st.style.height="";st.style.width="";
+  }
+}
+function autoAssign(){
+  var d=D(),lc=ci(d,"mpitarika");if(lc<0)return 0;
+  var cnt={},byDate={},days={},last={},n=0;
+  function dn(r){var x=parseInt(r.c[0],10);return isNaN(x)?0:x}
+  d.rows.forEach(function(r){var v=String(r.c[lc]||"").trim().toLowerCase();if(!v)return;cnt[v]=(cnt[v]||0)+1;(byDate[r.c[0]]=byDate[r.c[0]]||{})[v]=1;(days[v]=days[v]||[]).push(dn(r))});
+  d.rows.forEach(function(r){
+    var cur=String(r.c[lc]||"").trim().toLowerCase();
+    if(cur){if(r.z)last[r.z]=cur;return}
+    var z=r.z&&fzOf(r.z);if(!z)return;
+    var best=null,bs=1e9,day=dn(r);
+    z.b.map(bname).filter(Boolean).forEach(function(nm){
+      var k=nm.toLowerCase();if((byDate[r.c[0]]||{})[k])return;
+      var md=99;(days[k]||[]).forEach(function(x){md=Math.min(md,Math.abs(x-day))});
+      /* mizara ho mitovy ny isa; manafay ny mpitarika efa nitarika tato ho ato (ao anatin'ny 14 andro, aloha na aoriana) */
+      var sc=(cnt[k]||0)*10+(md<=14?(15-md)*1.5:0)+(last[r.z]==k?4:0);
+      if(sc<bs){bs=sc;best=nm}});
+    if(!best)return;
+    var k2=best.toLowerCase();r.c[lc]=best;cnt[k2]=(cnt[k2]||0)+1;(byDate[r.c[0]]=byDate[r.c[0]]||{})[k2]=1;(days[k2]=days[k2]||[]).push(day);last[r.z]=k2;n++;
+  });
+  if(n)save();
+  return n;
+}
+
+/* ---------- Fandraisana ---------- */
+function upcoming(){
+  var t=new Date(),td=new Date(t.getFullYear(),t.getMonth(),t.getDate());
+  for(var k=0;k<4;k++){
+    var m=td.getMonth()+k,y=td.getFullYear()+Math.floor(m/12);m=m%12;
+    var d=monthData(y,m),di=Math.max(0,ci(d,"daty")),best=null,list=[];
+    d.rows.forEach(function(r){var dn=parseInt(r.c[di],10);if(isNaN(dn))return;var dt=new Date(y,m,dn);if(dt<td)return;
+      if(!best||dt<best){best=dt;list=[r]}else if(+dt==+best)list.push(r)});
+    if(best)return {date:best,rows:list,d:d,today:td};
+  }
+  return null;
+}
+function dayNames(b){
+  var w=[];fzSorted().forEach(function(z){if(z.b.indexOf(b.id)>=0&&w.indexOf(DN[z.w])<0)w.push(DN[z.w])});return w;
+}
+function broForm(){
+  var b=fm.id&&bro(fm.id);
+  return '<div class="form" id="fm"><h3>'+(b?'Hanova rahalahy':'Hampiditra rahalahy afaka mitarika')+'</h3>'+
+    '<label>Anarana<input type="text" id="f_n" value="'+escA(b?b.n:"")+'" autocomplete="off"></label>'+
+    '<label>Laharana finday (tsy voatery)<input type="tel" id="f_p" inputmode="tel" value="'+escA(b?b.p||"":"")+'"></label>'+
+    '<div class="fa"><button class="pri" data-a="savebro">Tehirizo</button><button data-a="cancel">Foano</button>'+(b?'<button class="dng" data-a="delbro" data-id="'+b.id+'">Fafao</button>':'')+'</div></div>';
+}
+function fzForm(){
+  var z=fm.id&&fzOf(fm.id),w=z?z.w:2;
+  var dopt=[1,2,3,4,5,6,0].map(function(i){return '<option value="'+i+'"'+(i==w?' selected':'')+'>'+DN[i]+'</option>'}).join("");
+  var ck=S.cfg.bro.length?S.cfg.bro.map(function(b){return '<label><input type="checkbox" value="'+b.id+'"'+(z&&z.b.indexOf(b.id)>=0?' checked':'')+'>'+esc(b.n)+'</label>'}).join(""):'<span class="mut">Ampidiro aloha ny rahalahy afaka mitarika.</span>';
+  return '<div class="form" id="fm"><h3>'+(z?'Hanova faritany':'Hampiditra faritany')+'</h3>'+
+    '<label>Anaran’ny faritany<input type="text" id="f_n" value="'+escA(z?z.n:"")+'" autocomplete="off"></label>'+
+    '<label>Andro<select id="f_w">'+dopt+'</select></label>'+
+    '<label class="ckl"><input type="checkbox" id="f_f"'+(z&&z.f?' checked':'')+'> Faritany lavitra (ho an’ny sortie)</label>'+
+    '<label>Andiam-pitory (raha misy, ohatra: Andiam-pitory 1)<input type="text" id="f_g" value="'+escA(z?z.g:"")+'" autocomplete="off"></label>'+
+    '<label>Ora fanombohana<input type="text" id="f_h" inputmode="numeric" placeholder="8:30" value="'+escA(z?z.h:"8:30")+'"></label>'+
+    '<label>Toerana fihaonana alohan’ny fanompoana<input type="text" id="f_l" value="'+escA(z?z.l:"")+'" autocomplete="off"></label>'+
+    '<label>Rahalahy afaka mitarika</label><div class="ck" id="f_b">'+ck+'</div>'+
+    '<div class="fa"><button class="pri" data-a="savefz">Tehirizo</button><button data-a="cancel">Foano</button>'+(z?'<button class="dng" data-a="delfz" data-id="'+z.id+'">Fafao</button>':'')+'</div></div>';
+}
+function renderDash(){
+  var t=new Date(),td=new Date(t.getFullYear(),t.getMonth(),t.getDate()),u=upcoming(),h="";
+  h+='<header><h1>'+TITLE+'</h1><p>'+CONG+'</p><p>'+DN[td.getDay()]+' '+td.getDate()+' '+MG[td.getMonth()]+' '+td.getFullYear()+'</p></header>';
+  /* fanompoana manaraka */
+  h+='<section class="card"><h2>Fanompoana manaraka</h2>';
+  if(u){
+    var dd=Math.round((u.date-td)/864e5),cd=dd==0?"Anio":dd==1?"Rahampitso":"Afaka "+dd+" andro";
+    h+='<div class="big">'+DN[u.date.getDay()]+' '+u.date.getDate()+' '+MG[u.date.getMonth()]+'</div><span class="cd">'+cd+'</span>';
+    u.rows.forEach(function(r){
+      var L=cell(u.d,r,"mpitarika").trim(),f=cell(u.d,r,"faritany").trim();
+      h+='<div class="svc"><div class="tm">'+esc(cell(u.d,r,"ora"))+(r.s?'<span class="bd">SORTIE</span>':'')+'</div>'+
+        '<div class="rl"><span>Toerana fihaonana</span><b>'+esc(cell(u.d,r,"toerana fihaonana"))+'</b></div>'+
+        (f?'<div class="rl"><span>Faritany</span><b>'+esc(f)+'</b></div>':'')+
+        '<div class="rl"><span>Mpitarika</span>'+(L?'<b>'+esc(L)+'</b>':'<span class="warn">Mbola tsy voatendry</span>')+'</div></div>';
+    });
+  }else h+='<p class="mut">Tsy misy fanompoana ho avy. Ampidiro ao amin’ny faritany ny andro fanompoana.</p>';
+  h+='</section>';
+  /* ity volana ity */
+  var cd2=monthData(t.getFullYear(),t.getMonth()),lc=ci(cd2,"mpitarika"),dates={},miss=0;
+  cd2.rows.forEach(function(r){dates[r.c[0]]=1;if(lc>=0&&!String(r.c[lc]||"").trim())miss++});
+  h+='<section class="card"><h2>'+MG[t.getMonth()]+' '+t.getFullYear()+'</h2>'+
+    '<div class="rl"><span>Andro fanompoana</span><b>'+Object.keys(dates).length+'</b></div>'+
+    '<div class="rl"><span>Mbola tsy misy mpitarika</span>'+(miss?'<span class="warn">'+miss+' andalana</span>':'<b>Feno daholo</b>')+'</div>'+
+    '<div class="tools"><button class="pri" data-v="prog">📋 Hijery ny programme</button></div></section>';
+  /* faritany */
+  h+='<section class="card"><div class="hd"><h2>Faritany</h2><button class="pri" data-a="addfz">＋ Faritany</button></div>';
+  if(fm&&fm.k=="fz"&&!fm.id)h+=fzForm();
+  var zs=fzSorted();
+  if(!zs.length)h+='<p class="mut">Mbola tsy misy faritany. Tsindrio ny “＋ Faritany”.</p>';
+  h+=zs.map(function(z){
+    if(fm&&fm.k=="fz"&&fm.id==z.id)return fzForm();
+    var nm=z.b.map(bname).filter(Boolean);
+    return '<div class="item"><div class="ih"><b>'+(z.f?'Sortie':DN[z.w])+(z.h?', '+esc(z.h):'')+(z.f?'<span class="bd">LAVITRA</span>':'')+'</b><button data-a="editfz" data-id="'+z.id+'" aria-label="Hanova">✎ Hanova</button></div>'+
+      '<div>'+esc((z.g?z.g+": ":"")+z.n)+'</div><div class="sm">Fivoriana: '+esc(z.l||"tsy voalaza")+'</div>'+
+      '<div class="chips">'+(nm.length?nm.map(function(n){return '<span class="chip">'+esc(n)+'</span>'}).join(""):'<span class="warn">Tsy mbola misy rahalahy afaka mitarika</span>')+'</div></div>';
+  }).join("");
+  h+='</section>';
+  /* rahalahy */
+  h+='<section class="card"><div class="hd"><h2>Rahalahy afaka mitarika</h2><button class="pri" data-a="addbro">＋ Rahalahy</button></div>';
+  if(fm&&fm.k=="bro"&&!fm.id)h+=broForm();
+  if(!S.cfg.bro.length)h+='<p class="mut">Mbola tsy misy rahalahy. Tsindrio ny “＋ Rahalahy”.</p>';
+  h+=S.cfg.bro.map(function(b){
+    if(fm&&fm.k=="bro"&&fm.id==b.id)return broForm();
+    var dn=dayNames(b);
+    return '<div class="item"><div class="ih"><b>'+esc(b.n)+'</b><button data-a="editbro" data-id="'+b.id+'" aria-label="Hanova">✎ Hanova</button></div>'+
+      '<div class="sm">'+(dn.length?'Afaka mitarika: '+esc(dn.join(", ")):'Tsy mbola voatendry amin’ny faritany')+'</div>'+
+      (b.p?'<div class="sm"><a href="tel:'+escA(b.p.replace(/[^\d+]/g,""))+'">'+esc(b.p)+'</a></div>':'')+'</div>';
+  }).join("");
+  h+='</section>';
+  document.getElementById("dash").innerHTML=h;
+}
+function toast(msg,lbl,fn){
+  var e=document.createElement("div");e.className="toast";e.textContent=msg;
+  if(lbl){var b=document.createElement("button");b.className="tu";b.textContent=lbl;b.onclick=function(){fn();if(e.parentNode)e.parentNode.removeChild(e)};e.appendChild(b)}
+  document.body.appendChild(e);
+  setTimeout(function(){if(e.parentNode)e.parentNode.removeChild(e)},lbl?9000:3200);
+}
+function val(id){var e=document.getElementById(id);return e?e.value:""}
+function openForm(k,id){
+  fm={k:k,id:id||null};renderDash();
+  var f=document.getElementById("fm");if(f){if(f.scrollIntoView)f.scrollIntoView({block:"center"});var i=document.getElementById("f_n");if(i&&i.focus)i.focus()}
+}
+function act(a,id){
+  if(a=="addbro")return openForm("bro");
+  if(a=="editbro")return openForm("bro",id);
+  if(a=="addfz")return openForm("fz");
+  if(a=="editfz")return openForm("fz",id);
+  if(a=="cancel"){fm=null;return renderDash()}
+  if(a=="savebro"){var e=saveBro(fm&&fm.id,val("f_n"),val("f_p"));if(e){alert(e);return}fm=null;renderDash();render();return toast("Voatahiry ny rahalahy.")}
+  if(a=="savefz"){
+    var ids=[];document.querySelectorAll("#f_b input").forEach(function(c){if(c.checked)ids.push(c.value)});
+    var e2=saveFz({id:fm&&fm.id,n:val("f_n"),w:val("f_w"),g:val("f_g"),h:val("f_h"),l:val("f_l"),b:ids,f:!!(document.getElementById("f_f")&&document.getElementById("f_f").checked)});
+    if(e2){alert(e2);return}fm=null;renderDash();render();return toast("Voatahiry ny faritany. Azo isafidianana avy hatrany ao amin’ny Programme; ny andalana vaovao ihany no mameno ho azy.");
+  }
+  if(a=="delbro"){if(confirm("Hofafana ao amin’ny lisitra ve ity rahalahy ity?")){delBro(id);fm=null;renderDash();render()}return}
+  if(a=="delfz"){if(confirm("Hofafana ve ity faritany ity?")){delFz(id);fm=null;renderDash();render()}return}
+}
+
+/* ---------- fifandraisana ---------- */
+function setView(v){
+  view=v;document.body.setAttribute("data-v",v);
+  document.getElementById("vd").setAttribute("aria-pressed",v=="dash");
+  document.getElementById("vp").setAttribute("aria-pressed",v=="prog");
+  if(v=="dash")renderDash();else render();
+  if(window.scrollTo)window.scrollTo(0,0);
+}
+document.addEventListener("input",function(e){
+  var t=e.target;if(!t.classList||!t.classList.contains("e"))return;
+  var v=t.innerText.replace(/\u00a0/g," ");if(!v.trim())v="";
+  var d=D(),a=t.dataset;
+  if(a.f)d[a.f]=v;else if(a.h!==undefined)d.cols[+a.h]=v;else{var gn=+a.g||1;for(var gk=0;gk<gn;gk++){var gr=d.rows[+a.r+gk];if(gr)gr.c[+a.c]=v}}
+  save();
+});
+document.addEventListener("change",function(e){
+  var t=e.target;if(!t.classList||!t.classList.contains("ms"))return;
+  var d=D(),r=d.rows[+t.dataset.r];if(!r)return;
+  if(t.dataset.k=="z"){setZone(d,r,t.value);return}
+  var lc=ci(d,"mpitarika");if(lc<0)return;
+  var v=t.value;
+  if(v=="__other__"){var x=prompt("Soraty ny anaran’ny mpitarika:",r.c[lc]||"");if(x===null){render();return}v=x.trim()}
+  r.c[lc]=v;save();render();
+});
+document.addEventListener("focusout",function(e){var t=e.target;if(t.classList&&t.classList.contains("e")){
+  if(t.dataset.c!==undefined&&D().cols[+t.dataset.c]!==undefined&&D().cols[+t.dataset.c].trim().toLowerCase()=="andro"||t.dataset.h!==undefined)render();}});
+document.addEventListener("paste",function(e){var t=e.target;if(t.classList&&t.classList.contains("e")){
+  e.preventDefault();var x=(e.clipboardData||window.clipboardData).getData("text");document.execCommand("insertText",false,x)}});
+var rsArm=0;
+document.addEventListener("click",function(e){
+  var b=e.target.closest("button");if(!b)return;var a=b.dataset;
+  if(a.v){setView(a.v);return}
+  if(a.a){act(a.a,a.id);return}
+  var d;
+  if(a.ar!==undefined){d=D();var i2=+a.ar,src=d.rows[i2],ac=ci(d,"andro"),ao=ci(d,"ora");d.rows.splice(i2+1,0,{c:d.cols.map(function(_,j){return (j==0||j==ac||j==ao)?(src.c[j]||""):""}),s:src.s?1:0});save();render()}
+  else if(a.dr!==undefined){snap();d=D();d.rows.splice(+a.dr,1);save();render();toast("Voafafa ny andalana.","↶ Hanafoana",undo)}
+  else if(a.sr!==undefined){d=D();d.rows[+a.sr].s=d.rows[+a.sr].s?0:1;save();render()}
+  else if(a.dc!==undefined){d=D();if(d.cols.length>1){snap();var i=+a.dc;d.cols.splice(i,1);d.rows.forEach(function(r){r.c.splice(i,1)});save();render();toast("Voafafa ny tsanganana.","↶ Hanafoana",undo)}}
+  else if(b.id=="ar"){d=D();d.rows.push({c:d.cols.map(function(){return ""}),s:0});save();render()}
+  else if(b.id=="ac"){d=D();d.cols.push("Tsanganana vaovao");d.rows.forEach(function(r){r.c.push("")});save();render()}
+  else if(b.id=="undo"){undo()}
+  else if(b.id=="aa"){snap();var n=autoAssign();if(!n)UN.pop();render();if(n)toast("Voatendry ny mpitarika ("+n+" andalana).","↶ Hanafoana",undo);else toast("Tsy misy andalana foana azo vatsiana.")}
+  else if(b.id=="rs"){
+    if(rsArm){snap();delete S.m[key(Y,M)];rsArm=0;save();render();toast("Naverina araka ny faritany ny volana.","↶ Hanafoana",undo)}
+    else{rsArm=1;b.textContent="Tsindrio indray raha azo antoka";setTimeout(function(){rsArm=0;var x=document.getElementById("rs");if(x)x.textContent="↺ Averina araka ny faritany"},3500)}
+  }
+});
+function go(n){M+=n;if(M<0){M=11;Y--}if(M>11){M=0;Y++}render()}
+document.getElementById("prev").onclick=function(){go(-1)};
+document.getElementById("next").onclick=function(){go(1)};
+document.getElementById("today").onclick=function(){var n=new Date();Y=n.getFullYear();M=n.getMonth();render()};
+document.getElementById("rot").onclick=function(){rotated=!rotated;this.setAttribute("aria-pressed",rotated);layout()};
+document.getElementById("thm").onclick=function(){var k=this.getAttribute("aria-pressed")!=="true";this.setAttribute("aria-pressed",k);document.documentElement.setAttribute("data-theme",k?"dark":"light")};
+document.getElementById("iob").onclick=function(){var p=this.getAttribute("aria-pressed")!=="true";this.setAttribute("aria-pressed",p);document.getElementById("io").style.display=p?"block":"none"};
+document.getElementById("exp").onclick=function(){var t=document.getElementById("ta");t.value=JSON.stringify(S);t.focus();t.select()};
+document.getElementById("imp").onclick=function(){
+  try{var o=JSON.parse(document.getElementById("ta").value);if(!o||!o.m)throw 0;S=o;ensure();save();fm=null;setView(view);document.getElementById("ta").value="Vita ny fampidirana."}
+  catch(e){document.getElementById("ta").value="Tsy mety ny angona napetraka."}};
+
+var pgst=document.createElement("style");document.head.appendChild(pgst);
+var ORI="auto";
+try{ORI=localStorage.getItem("fp-ori")||"auto"}catch(e){}
+var ORIL={auto:"↔ Auto",land:"▭ Mitsivalana",port:"▯ Mitsangana"};
+function oriShow(){var b=document.getElementById("ori");b.textContent=ORIL[ORI]||ORIL.auto}
+document.getElementById("ori").onclick=function(){
+  ORI=ORI==="auto"?"land":ORI==="land"?"port":"auto";
+  try{localStorage.setItem("fp-ori",ORI)}catch(e){}
+  oriShow()};
+oriShow();
+function doPrint(){
+  if(view!="prog"){restoreV=view;setView("prog")}
+  var d=D(),old=document.title;
+  var o=ORI==="land"?"landscape":ORI==="port"?"portrait":(d.cols.length>6?"landscape":"portrait");
+  pgst.textContent="@page{size:A4 "+o+"}";
+  if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
+  document.title="Fandaharam-panompoana "+d.lb;
+  setTimeout(function(){window.print();setTimeout(function(){document.title=old},500)},80);
+}
+window.addEventListener("afterprint",function(){if(restoreV){var v=restoreV;restoreV=null;setView(v)}});
+document.getElementById("prt").onclick=doPrint;
+window.addEventListener("resize",layout);
+setView("dash");
+if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}
+</script>
+</body>
+</html>
